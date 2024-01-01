@@ -12,19 +12,21 @@ import {
     // UseInterceptors,
     UseGuards
 } from '@nestjs/common';
-import { createUserDto } from './dtos/create-user.dto';
+import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+// import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './user.entity';
-import { AuthGuard } from 'src/guards/auth.guard';
+// import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 
-@Serialize(UserDto)
 @Controller('auth')
+@Serialize(UserDto)
 // @UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
     constructor(
@@ -48,7 +50,7 @@ export class UsersController {
     }
 
     @Post('/signup')
-    async createUser(@Body() body: createUserDto, @Session() session: any) {
+    async createUser(@Body() body: CreateUserDto, @Session() session: any) {
         console.log('sign upbody', body);
         // this.usersService.create(body.email, body.password)
         const user = await this.authService.signup(body.email, body.password)
@@ -57,7 +59,7 @@ export class UsersController {
     }
 
     @Post('/signin')
-    async signin(@Body() body: createUserDto, @Session() session: any) {
+    async signin(@Body() body: CreateUserDto, @Session() session: any) {
         console.log('sign in body', body);
         // this.usersService.create(body.email, body.password)
         const user = this.authService.signin(body.email, body.password);

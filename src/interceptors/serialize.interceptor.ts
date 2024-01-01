@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
+import { plainToClass, plainToInstance } from 'class-transformer';
 
 interface ClassConstConstructor {
     new(...args: any[]): {}
@@ -28,7 +28,7 @@ export class SerializeInterceptor implements NestInterceptor {
             map((data: any) => {
                 // // Run something before the response is sent out
                 // console.log('I;m running before response is sent out', data);
-                return plainToClass(this.dto, data, {
+                return plainToInstance(this.dto, data, {
                     excludeExtraneousValues: true
                 })
             })
