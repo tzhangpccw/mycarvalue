@@ -29,7 +29,9 @@ export class UsersService {
 
     findOne(id: number) {
         if (!id) return null;
-        return this.repo.findOneBy({ id })
+        // return this.repo.findOneBy({ id })
+        return this.repo.findOne({ id })
+
     }
 
     find(email: string) {
@@ -49,7 +51,6 @@ export class UsersService {
         return this.repo.remove(user)
     }
 }
-
 /*
 Now ideally we would not throw a plain error object 
 because Nest doesn't really know how to extract

@@ -8,7 +8,7 @@ import { ReportDto } from './dtos/report.dto';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { ApproveReportDto } from './dtos/approve-report.dto';
 import { AdminGuard } from '../guards/admin.guard';
-import { GetEstimateDto } from 'src/users/dtos/get-estimate.dto';
+import { GetEstimateDto } from '../users/dtos/get-estimate.dto';
 @Controller('reports')
 export class ReportsController {
     constructor(private reportsService: ReportsService) { }
